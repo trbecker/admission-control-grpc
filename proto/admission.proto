@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package admission;
+
+service Admission {
+    rpc Admission (AdmissionRequest) returns (AdmissionResponse) {}
+}
+
+message AdmissionRequest {
+    string iMSI = 1;
+}
+
+message AdmissionResponse {
+    bool accept = 1;
+}

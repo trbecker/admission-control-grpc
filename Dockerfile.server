@@ -1,0 +1,23 @@
+FROM ubuntu:20.04
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    cmake build-essential autoconf libtool pkg-config git \
+    libgrpc++-dev libprotobuf-dev protobuf-c-compiler \
+    protobuf-compiler && apt-get clean
+
+RUN mkdir /src
+WORKDIR /src
+
+COPY server /src/server
+COPY proto /src/proto
+COPY standalone_server /src/standalone_server
+
+RUN mkdir server/build && cd server/build \
+    && cmake .. && make VERBOSE=1 && make install \
+    && cd .. && rm -fr build
+
+RUN mkdir standalone_server/build && cd standalone_server/build \
+    && cmake .. && make VERBOSE=1 && make install \
+    && cd .. && rm -fr build
+
+ENTRYPOINT [ "/usr/local/bin/admission_server" ]

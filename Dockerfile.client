@@ -1,0 +1,23 @@
+FROM ubuntu:20.04
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    cmake build-essential autoconf libtool pkg-config git \
+    libgrpc++-dev libprotobuf-dev protobuf-c-compiler \
+    protobuf-compiler && apt-get clean
+
+RUN mkdir /src
+WORKDIR /src
+
+COPY proto /src/proto
+COPY client /src/client
+COPY standalone_client /src/standalone_client
+
+RUN mkdir client/build && cd client/build \
+    && cmake .. && make VERBOSE=1 && make install \
+    && cd .. && rm -fr build
+
+RUN mkdir standalone_client/build && cd standalone_client/build \
+    && cmake .. && make VERBOSE=1 && make install \
+    && cd .. && rm -fr build
+
+ENTRYPOINT [ "sleep", "1000000" ]
