@@ -5,9 +5,10 @@ int main(int argc, char **argv)
 {
     string serverAddress(argv[1]);
     string imsi(argv[2]);
+    string gnb(argv[3]);
     
     auto clnt = createClient(serverAddress);
-    if (clnt->requestAdmission(imsi)) {
+    if (clnt->requestAdmission(imsi, gnb)) {
         std::cout << "accepted" << std::endl;
         return 0;
     }

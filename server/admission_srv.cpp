@@ -33,7 +33,8 @@ Status AdmissionImpl::Admission(ServerContext *context,
         AdmissionResponse *response)
 {
     string imsi = request->imsi();
-    response->set_accept(observer->admission(imsi));
+    string gnb = request->gnb();
+    response->set_accept(observer->admission(imsi, gnb));
     return Status::OK;
 
 }

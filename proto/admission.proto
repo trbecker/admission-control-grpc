@@ -8,6 +8,7 @@ service Admission {
 
 message AdmissionRequest {
     string iMSI = 1;
+    string gnb = 2;
 }
 
 message AdmissionResponse {

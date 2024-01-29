@@ -6,7 +6,7 @@ using std::string;
 class AdmissionObserver
 {
 public:
-    virtual bool admission(const string &imsi) = 0;
+    virtual bool admission(const string &imsi, const string &gnb) = 0;
 };
 
 extern void runServer(const string &serverAddress,
