@@ -2,7 +2,7 @@
 
 class JustOk : public AdmissionObserver {
 public:
-    bool admission(const string &imsi, const string &gnb) {
+    bool admission(const string &imsi, const string &gnb, float sinr) {
         return true;
     }
 };

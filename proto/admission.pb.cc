@@ -75,6 +75,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::admission::AdmissionRequest, imsi_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::admission::AdmissionRequest, gnb_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::admission::AdmissionRequest, sinr_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::admission::AdmissionResponse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -84,7 +85,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::admission::AdmissionRequest)},
-  { 7, -1, sizeof(::admission::AdmissionResponse)},
+  { 8, -1, sizeof(::admission::AdmissionResponse)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -113,15 +114,15 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\017admission.proto\022\tadmission\"-\n\020Admissio"
-      "nRequest\022\014\n\004iMSI\030\001 \001(\t\022\013\n\003gnb\030\002 \001(\t\"#\n\021A"
-      "dmissionResponse\022\016\n\006accept\030\001 \001(\0102U\n\tAdmi"
-      "ssion\022H\n\tAdmission\022\033.admission.Admission"
-      "Request\032\034.admission.AdmissionResponse\"\000b"
-      "\006proto3"
+      "\n\017admission.proto\022\tadmission\";\n\020Admissio"
+      "nRequest\022\014\n\004iMSI\030\001 \001(\t\022\013\n\003gnb\030\002 \001(\t\022\014\n\004s"
+      "inr\030\003 \001(\002\"#\n\021AdmissionResponse\022\016\n\006accept"
+      "\030\001 \001(\0102U\n\tAdmission\022H\n\tAdmission\022\033.admis"
+      "sion.AdmissionRequest\032\034.admission.Admiss"
+      "ionResponse\"\000b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 207);
+      descriptor, 221);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "admission.proto", &protobuf_RegisterTypes);
 }
@@ -146,6 +147,7 @@ void AdmissionRequest::InitAsDefaultInstance() {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int AdmissionRequest::kIMSIFieldNumber;
 const int AdmissionRequest::kGnbFieldNumber;
+const int AdmissionRequest::kSinrFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 AdmissionRequest::AdmissionRequest()
@@ -167,12 +169,14 @@ AdmissionRequest::AdmissionRequest(const AdmissionRequest& from)
   if (from.gnb().size() > 0) {
     gnb_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.gnb_);
   }
+  sinr_ = from.sinr_;
   // @@protoc_insertion_point(copy_constructor:admission.AdmissionRequest)
 }
 
 void AdmissionRequest::SharedCtor() {
   imsi_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   gnb_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  sinr_ = 0;
 }
 
 AdmissionRequest::~AdmissionRequest() {
@@ -207,6 +211,7 @@ void AdmissionRequest::Clear() {
 
   imsi_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   gnb_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  sinr_ = 0;
   _internal_metadata_.Clear();
 }
 
@@ -246,6 +251,20 @@ bool AdmissionRequest::MergePartialFromCodedStream(
             this->gnb().data(), static_cast<int>(this->gnb().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
             "admission.AdmissionRequest.gnb"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // float sinr = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(29u /* 29 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &sinr_)));
         } else {
           goto handle_unusual;
         }
@@ -298,6 +317,11 @@ void AdmissionRequest::SerializeWithCachedSizes(
       2, this->gnb(), output);
   }
 
+  // float sinr = 3;
+  if (this->sinr() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->sinr(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -334,6 +358,11 @@ void AdmissionRequest::SerializeWithCachedSizes(
         2, this->gnb(), target);
   }
 
+  // float sinr = 3;
+  if (this->sinr() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->sinr(), target);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -363,6 +392,11 @@ size_t AdmissionRequest::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->gnb());
+  }
+
+  // float sinr = 3;
+  if (this->sinr() != 0) {
+    total_size += 1 + 4;
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -400,6 +434,9 @@ void AdmissionRequest::MergeFrom(const AdmissionRequest& from) {
 
     gnb_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.gnb_);
   }
+  if (from.sinr() != 0) {
+    set_sinr(from.sinr());
+  }
 }
 
 void AdmissionRequest::CopyFrom(const ::google::protobuf::Message& from) {
@@ -430,6 +467,7 @@ void AdmissionRequest::InternalSwap(AdmissionRequest* other) {
     GetArenaNoVirtual());
   gnb_.Swap(&other->gnb_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
+  swap(sinr_, other->sinr_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 

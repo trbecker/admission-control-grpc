@@ -178,12 +178,19 @@ class AdmissionRequest : public ::google::protobuf::Message /* @@protoc_insertio
   ::std::string* release_gnb();
   void set_allocated_gnb(::std::string* gnb);
 
+  // float sinr = 3;
+  void clear_sinr();
+  static const int kSinrFieldNumber = 3;
+  float sinr() const;
+  void set_sinr(float value);
+
   // @@protoc_insertion_point(class_scope:admission.AdmissionRequest)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr imsi_;
   ::google::protobuf::internal::ArenaStringPtr gnb_;
+  float sinr_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_admission_2eproto::TableStruct;
 };
@@ -405,6 +412,20 @@ inline void AdmissionRequest::set_allocated_gnb(::std::string* gnb) {
   }
   gnb_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), gnb);
   // @@protoc_insertion_point(field_set_allocated:admission.AdmissionRequest.gnb)
+}
+
+// float sinr = 3;
+inline void AdmissionRequest::clear_sinr() {
+  sinr_ = 0;
+}
+inline float AdmissionRequest::sinr() const {
+  // @@protoc_insertion_point(field_get:admission.AdmissionRequest.sinr)
+  return sinr_;
+}
+inline void AdmissionRequest::set_sinr(float value) {
+  
+  sinr_ = value;
+  // @@protoc_insertion_point(field_set:admission.AdmissionRequest.sinr)
 }
 
 // -------------------------------------------------------------------
