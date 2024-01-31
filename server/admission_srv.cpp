@@ -15,15 +15,15 @@ using std::string;
 
 class AdmissionImpl : public Admission::Service {
 public:
-    AdmissionImpl(std::unique_ptr<AdmissionObserver> &observer);
+    AdmissionImpl(std::shared_ptr<AdmissionObserver> &observer);
     Status Admission(ServerContext *context,
             const AdmissionRequest *request,
             AdmissionResponse *response);
 protected:
-    std::unique_ptr<AdmissionObserver> observer;
+    std::shared_ptr<AdmissionObserver> observer;
 };
 
-AdmissionImpl::AdmissionImpl(std::unique_ptr<AdmissionObserver> &observer)
+AdmissionImpl::AdmissionImpl(std::shared_ptr<AdmissionObserver> &observer)
 {
     this->observer = std::move(observer);
 }
@@ -42,7 +42,7 @@ Status AdmissionImpl::Admission(ServerContext *context,
 
 
 void runServer(const string &serverAddress,
-        std::unique_ptr<AdmissionObserver> &observer)
+        std::shared_ptr<AdmissionObserver> &observer)
 {
     AdmissionImpl impl(observer);
     ServerBuilder builder;

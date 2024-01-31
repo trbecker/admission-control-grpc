@@ -10,4 +10,4 @@ public:
 };
 
 extern void runServer(const string &serverAddress,
-        std::unique_ptr<AdmissionObserver> &observer);
+        std::shared_ptr<AdmissionObserver> &observer);

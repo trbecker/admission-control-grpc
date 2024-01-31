@@ -9,7 +9,7 @@ public:
 
 int main(int argc, char **argv) {
     string serverAddress("0.0.0.0:50101");
-    std::unique_ptr<AdmissionObserver> observer = std::make_unique<JustOk>();
+    std::shared_ptr<AdmissionObserver> observer = std::make_shared<JustOk>();
     runServer(serverAddress, observer);
     return 0;
 }
