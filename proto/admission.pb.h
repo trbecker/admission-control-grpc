@@ -164,19 +164,11 @@ class AdmissionRequest : public ::google::protobuf::Message /* @@protoc_insertio
   ::std::string* release_imsi();
   void set_allocated_imsi(::std::string* imsi);
 
-  // string gnb = 2;
+  // int32 gnb = 2;
   void clear_gnb();
   static const int kGnbFieldNumber = 2;
-  const ::std::string& gnb() const;
-  void set_gnb(const ::std::string& value);
-  #if LANG_CXX11
-  void set_gnb(::std::string&& value);
-  #endif
-  void set_gnb(const char* value);
-  void set_gnb(const char* value, size_t size);
-  ::std::string* mutable_gnb();
-  ::std::string* release_gnb();
-  void set_allocated_gnb(::std::string* gnb);
+  ::google::protobuf::int32 gnb() const;
+  void set_gnb(::google::protobuf::int32 value);
 
   // float sinr = 3;
   void clear_sinr();
@@ -189,7 +181,7 @@ class AdmissionRequest : public ::google::protobuf::Message /* @@protoc_insertio
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr imsi_;
-  ::google::protobuf::internal::ArenaStringPtr gnb_;
+  ::google::protobuf::int32 gnb_;
   float sinr_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_admission_2eproto::TableStruct;
@@ -361,57 +353,18 @@ inline void AdmissionRequest::set_allocated_imsi(::std::string* imsi) {
   // @@protoc_insertion_point(field_set_allocated:admission.AdmissionRequest.iMSI)
 }
 
-// string gnb = 2;
+// int32 gnb = 2;
 inline void AdmissionRequest::clear_gnb() {
-  gnb_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  gnb_ = 0;
 }
-inline const ::std::string& AdmissionRequest::gnb() const {
+inline ::google::protobuf::int32 AdmissionRequest::gnb() const {
   // @@protoc_insertion_point(field_get:admission.AdmissionRequest.gnb)
-  return gnb_.GetNoArena();
+  return gnb_;
 }
-inline void AdmissionRequest::set_gnb(const ::std::string& value) {
+inline void AdmissionRequest::set_gnb(::google::protobuf::int32 value) {
   
-  gnb_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  gnb_ = value;
   // @@protoc_insertion_point(field_set:admission.AdmissionRequest.gnb)
-}
-#if LANG_CXX11
-inline void AdmissionRequest::set_gnb(::std::string&& value) {
-  
-  gnb_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:admission.AdmissionRequest.gnb)
-}
-#endif
-inline void AdmissionRequest::set_gnb(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  
-  gnb_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:admission.AdmissionRequest.gnb)
-}
-inline void AdmissionRequest::set_gnb(const char* value, size_t size) {
-  
-  gnb_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:admission.AdmissionRequest.gnb)
-}
-inline ::std::string* AdmissionRequest::mutable_gnb() {
-  
-  // @@protoc_insertion_point(field_mutable:admission.AdmissionRequest.gnb)
-  return gnb_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* AdmissionRequest::release_gnb() {
-  // @@protoc_insertion_point(field_release:admission.AdmissionRequest.gnb)
-  
-  return gnb_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void AdmissionRequest::set_allocated_gnb(::std::string* gnb) {
-  if (gnb != NULL) {
-    
-  } else {
-    
-  }
-  gnb_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), gnb);
-  // @@protoc_insertion_point(field_set_allocated:admission.AdmissionRequest.gnb)
 }
 
 // float sinr = 3;

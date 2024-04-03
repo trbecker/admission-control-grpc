@@ -115,7 +115,7 @@ void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\017admission.proto\022\tadmission\";\n\020Admissio"
-      "nRequest\022\014\n\004iMSI\030\001 \001(\t\022\013\n\003gnb\030\002 \001(\t\022\014\n\004s"
+      "nRequest\022\014\n\004iMSI\030\001 \001(\t\022\013\n\003gnb\030\002 \001(\005\022\014\n\004s"
       "inr\030\003 \001(\002\"#\n\021AdmissionResponse\022\016\n\006accept"
       "\030\001 \001(\0102U\n\tAdmission\022H\n\tAdmission\022\033.admis"
       "sion.AdmissionRequest\032\034.admission.Admiss"
@@ -165,18 +165,17 @@ AdmissionRequest::AdmissionRequest(const AdmissionRequest& from)
   if (from.imsi().size() > 0) {
     imsi_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.imsi_);
   }
-  gnb_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.gnb().size() > 0) {
-    gnb_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.gnb_);
-  }
-  sinr_ = from.sinr_;
+  ::memcpy(&gnb_, &from.gnb_,
+    static_cast<size_t>(reinterpret_cast<char*>(&sinr_) -
+    reinterpret_cast<char*>(&gnb_)) + sizeof(sinr_));
   // @@protoc_insertion_point(copy_constructor:admission.AdmissionRequest)
 }
 
 void AdmissionRequest::SharedCtor() {
   imsi_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  gnb_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  sinr_ = 0;
+  ::memset(&gnb_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&sinr_) -
+      reinterpret_cast<char*>(&gnb_)) + sizeof(sinr_));
 }
 
 AdmissionRequest::~AdmissionRequest() {
@@ -186,7 +185,6 @@ AdmissionRequest::~AdmissionRequest() {
 
 void AdmissionRequest::SharedDtor() {
   imsi_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  gnb_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void AdmissionRequest::SetCachedSize(int size) const {
@@ -210,8 +208,9 @@ void AdmissionRequest::Clear() {
   (void) cached_has_bits;
 
   imsi_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  gnb_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  sinr_ = 0;
+  ::memset(&gnb_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&sinr_) -
+      reinterpret_cast<char*>(&gnb_)) + sizeof(sinr_));
   _internal_metadata_.Clear();
 }
 
@@ -241,16 +240,14 @@ bool AdmissionRequest::MergePartialFromCodedStream(
         break;
       }
 
-      // string gnb = 2;
+      // int32 gnb = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_gnb()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->gnb().data(), static_cast<int>(this->gnb().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "admission.AdmissionRequest.gnb"));
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &gnb_)));
         } else {
           goto handle_unusual;
         }
@@ -307,14 +304,9 @@ void AdmissionRequest::SerializeWithCachedSizes(
       1, this->imsi(), output);
   }
 
-  // string gnb = 2;
-  if (this->gnb().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->gnb().data(), static_cast<int>(this->gnb().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "admission.AdmissionRequest.gnb");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->gnb(), output);
+  // int32 gnb = 2;
+  if (this->gnb() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->gnb(), output);
   }
 
   // float sinr = 3;
@@ -347,15 +339,9 @@ void AdmissionRequest::SerializeWithCachedSizes(
         1, this->imsi(), target);
   }
 
-  // string gnb = 2;
-  if (this->gnb().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->gnb().data(), static_cast<int>(this->gnb().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "admission.AdmissionRequest.gnb");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->gnb(), target);
+  // int32 gnb = 2;
+  if (this->gnb() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->gnb(), target);
   }
 
   // float sinr = 3;
@@ -387,10 +373,10 @@ size_t AdmissionRequest::ByteSizeLong() const {
         this->imsi());
   }
 
-  // string gnb = 2;
-  if (this->gnb().size() > 0) {
+  // int32 gnb = 2;
+  if (this->gnb() != 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->gnb());
   }
 
@@ -430,9 +416,8 @@ void AdmissionRequest::MergeFrom(const AdmissionRequest& from) {
 
     imsi_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.imsi_);
   }
-  if (from.gnb().size() > 0) {
-
-    gnb_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.gnb_);
+  if (from.gnb() != 0) {
+    set_gnb(from.gnb());
   }
   if (from.sinr() != 0) {
     set_sinr(from.sinr());
@@ -465,8 +450,7 @@ void AdmissionRequest::InternalSwap(AdmissionRequest* other) {
   using std::swap;
   imsi_.Swap(&other->imsi_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  gnb_.Swap(&other->gnb_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
+  swap(gnb_, other->gnb_);
   swap(sinr_, other->sinr_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }

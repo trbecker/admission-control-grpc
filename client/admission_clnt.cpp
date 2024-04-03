@@ -13,7 +13,7 @@ using grpc::Status;
 class AdmissionClientImpl : public AdmissionClient {
 public:
     AdmissionClientImpl(std::shared_ptr<Channel> channel);
-    bool requestAdmission(const string &imsi, const string &gnb, const float sinr);
+    bool requestAdmission(const string &imsi, const int32_t gnb, const float sinr);
 
 protected:
     std::unique_ptr<Admission::Stub> stub;
@@ -25,7 +25,7 @@ AdmissionClientImpl::AdmissionClientImpl(std::shared_ptr<Channel> channel) :
     /* pass */    
 }
 
-bool AdmissionClientImpl::requestAdmission(const string &imsi, const string &gnb, const float sinr)
+bool AdmissionClientImpl::requestAdmission(const string &imsi, const int32_t gnb, const float sinr)
 {
     AdmissionRequest request;
     AdmissionResponse response;

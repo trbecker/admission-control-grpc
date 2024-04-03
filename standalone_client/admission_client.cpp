@@ -5,7 +5,7 @@ int main(int argc, char **argv)
 {
     string serverAddress(argv[1]);
     string imsi(argv[2]);
-    string gnb(argv[3]);
+    int32_t gnb = atoi(argv[3]);
     float sinr = atof(argv[4]);
     
     auto clnt = createClient(serverAddress);

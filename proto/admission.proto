@@ -8,7 +8,7 @@ service Admission {
 
 message AdmissionRequest {
     string iMSI = 1;
-    string gnb = 2;
+    int32 gnb = 2;
     float sinr = 3;
 }
 
